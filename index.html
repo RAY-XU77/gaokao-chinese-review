@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#2962FF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="语文复习">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <title>高考语文复习训练 — 冲刺125分</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 侧边导航 -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>📚 语文复习</h1>
+      <p>目标 125 分</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#home" class="active"><span class="nav-icon">🏠</span> 首页</a>
+      <a href="#modules"><span class="nav-icon">📖</span> 专项训练</a>
+      <a href="#exam"><span class="nav-icon">📝</span> 模拟考试</a>
+      <a href="#mistakes"><span class="nav-icon">❌</span> 错题本</a>
+      <a href="#analytics"><span class="nav-icon">📊</span> 成绩分析</a>
+      <a href="#record"><span class="nav-icon">📅</span> 学习记录</a>
+    </nav>
+    <div style="padding:12px 16px;font-size:11px;color:var(--text-secondary);border-top:1px solid var(--border)">
+      2027高考备考 · 新课标卷
+    </div>
+  </aside>
+
+  <!-- 主内容区 -->
+  <main class="main" id="app">
+    <div style="text-align:center;padding:80px 20px">
+      <div style="font-size:40px;margin-bottom:16px">⏳</div>
+      <h3>正在加载...</h3>
+      <p style="color:var(--text-secondary);margin-top:8px">请稍候，题目数据加载中</p>
+    </div>
+  </main>
+
+  <!-- 加载核心脚本 -->
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/data/modules.js"></script>
+  <script src="js/data/knowledge-data.js"></script>
+
+  <!-- 加载题库数据 -->
+  <script src="js/data/q01-info-reading.js"></script>
+  <script src="js/data/q02-literary-reading.js"></script>
+  <script src="js/data/q03-classical-chinese.js"></script>
+  <script src="js/data/q04-poetry.js"></script>
+  <script src="js/data/q05-recitation.js"></script>
+  <script src="js/data/q06-idiom.js"></script>
+  <script src="js/data/q07-sick-sentence.js"></script>
+  <script src="js/data/q08-coherence.js"></script>
+  <script src="js/data/q09-rhetoric.js"></script>
+  <script src="js/data/q10-writing.js"></script>
+
+  <!-- 加载视图 -->
+  <script src="js/views/home.js"></script>
+  <script src="js/views/module-list.js"></script>
+  <script src="js/views/knowledge.js"></script>
+  <script src="js/views/practice.js"></script>
+  <script src="js/views/mock-exam.js"></script>
+  <script src="js/views/mistake-book.js"></script>
+  <script src="js/views/analytics.js"></script>
+  <script src="js/views/record.js"></script>
+
+  <!-- 应用入口 -->
+  <script src="js/app.js"></script>
+
+  <!-- Service Worker 注册 -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function() {
+        navigator.serviceWorker.register("sw.js").then(function(reg) {
+          console.log("SW registered: " + reg.scope);
+        }).catch(function(err) {
+          console.log("SW registration failed: " + err);
+        });
+      });
+    }
+<script>
+console.log('=== DEBUG ===');
+['Q01','Q02','Q03','Q04','Q05','Q06','Q07','Q08','Q09','Q10',
+ 'Utils','Store','Router','Modules','Views','getModule'].forEach(function(v){
+  var val = typeof window[v];
+  var extra = '';
+  if (val !== 'undefined' && window[v] && window[v].length !== undefined) extra = ' (len=' + window[v].length + ')';
+  console.log(v + ': ' + val + extra);
+});
+</script>
+  </script>
+</body>
+</html>
