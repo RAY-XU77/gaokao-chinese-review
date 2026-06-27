@@ -1,0 +1,14 @@
+/* reset.css */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { line-height: 1.6; min-height: 100vh; }
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+button { cursor: pointer; font: inherit; color: inherit; border: none; background: none; }
+input, textarea, select { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+table { border-collapse: collapse; border-spacing: 0; }
