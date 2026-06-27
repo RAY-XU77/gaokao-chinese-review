@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html><head><meta charset=utf-8><title>诊断</title></head><body>
+<h2>JS 加载诊断</h2>
+<pre id="log" style="background:#f5f5f5;padding:16px;font-size:14px;line-height:1.6">正在诊断...</pre>
+<script>
+var log = document.getElementById('log');
+function out(s) { log.textContent += '\n' + s; }
+function done() {
+  out('');
+  out('=== 全局变量检查 ===');
+  var vars = ['Q01','Q02','Q03','Q04','Q05','Q06','Q07','Q08','Q09','Q10',
+    'Utils','Store','Router','Views','Modules','getModule'];
+  vars.forEach(function(v) {
+    var val = typeof window[v];
+    var extra = '';
+    if (val === 'object' && window[v] && window[v].length !== undefined) extra = ' (length=' + window[v].length + ')';
+    out(v + ': ' + val + extra);
+  });
+  out('');
+  out('Views 检查:');
+  if (window.Views) {
+    Object.keys(window.Views).forEach(function(k) { out('  Views.' + k + ': ' + typeof window.Views[k]); });
+  }
+}
+var files = [
+  'js/utils.js','js/store.js','js/router.js',
+  'js/data/modules.js','js/data/knowledge-data.js',
+  'js/data/q01-info-reading.js','js/data/q02-literary-reading.js',
+  'js/data/q03-classical-chinese.js','js/data/q04-poetry.js',
+  'js/data/q05-recitation.js','js/data/q06-idiom.js',
+  'js/data/q07-sick-sentence.js','js/data/q08-coherence.js',
+  'js/data/q09-rhetoric.js','js/data/q10-writing.js',
+  'js/views/home.js','js/views/module-list.js','js/views/knowledge.js',
+  'js/views/practice.js','js/views/mock-exam.js','js/views/mistake-book.js',
+  'js/views/analytics.js','js/views/record.js','js/app.js'
+];
+var i = 0;
+function loadNext() {
+  if (i >= files.length) {
+    out('--- All files loaded ---');
+    done();
+    return;
+  }
+  var f = files[i];
+  var s = document.createElement('script');
+  s.src = f + '?t=' + Date.now();
+  s.onerror = function(e) {
+    out('ERROR: ' + f + ' - failed to load/parse');
+    done();
+  };
+  s.onload = function() {
+    out('OK: ' + f);
+    i++;
+    setTimeout(loadNext, 10);
+  };
+  document.body.appendChild(s);
+}
+out('开始加载...');
+loadNext();
+</script>
+</body></html>
