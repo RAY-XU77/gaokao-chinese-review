@@ -1,0 +1,14 @@
+﻿{
+  "appId": "com.yuwen.review",
+  "appName": "高考语文复习",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1000,
+      "backgroundColor": "#1a1a2e"
+    }
+  }
+}
